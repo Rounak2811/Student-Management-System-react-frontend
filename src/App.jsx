@@ -9,6 +9,7 @@ import Signup from "./Components/Signup";
 import Dashboard from "./Components/Dashboard";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import { logout } from "./services/AuthService";
+import './App.css';
 
 function App() {
   const handleLogout = () => {
@@ -20,9 +21,11 @@ function App() {
 
   return (
     <Router>
-      <div className="m-5">
-        <div className="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-          <h2 className="m-0">Student Management System</h2>
+      <div className>
+        <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-4 border-bottom pb-3 gap-2">
+          <h2 className="m-0 text-center text-md-start">
+            Student Management System
+          </h2>
 
           {isAuthenticated && (
             <button className="btn btn-danger" onClick={handleLogout}>

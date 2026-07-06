@@ -50,7 +50,7 @@ function MainLayout() {
       {/* 4. The sharp foreground layer */}
       <div className="content-layer">
         <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-4 border-bottom pb-3 gap-2">
-          <h2 className={`m-3 text-center text-md-start text-${textColor}`}>
+          <h2 className={`m-3 text-center text-${textColor}`}>
             Student Management System
           </h2>
 

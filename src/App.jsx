@@ -21,7 +21,7 @@ function MainLayout() {
   const location = useLocation(); // Gets the current URL path
   const isAuthenticated = !!localStorage.getItem("accessToken");
 
-  let textColor=isAuthenticated?`primary`:`white`;
+  let textColor = isAuthenticated ? `primary` : `white`;
 
   const handleLogout = () => {
     logout();
@@ -50,7 +50,7 @@ function MainLayout() {
       {/* 4. The sharp foreground layer */}
       <div className="content-layer">
         <div className="d-flex flex-column flex-md-row justify-content-md-between align-items-center mb-4 border-bottom pb-3 gap-2">
-          <h2 className={`m-3 text-center text-${textColor}`}>
+          <h2 className={`m-auto text-center text-${textColor}`}>
             Student Management System
           </h2>
 

@@ -12,8 +12,6 @@ import Dashboard from "./Components/Dashboard";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import { logout } from "./services/AuthService";
 import './App.css';
-
-
 import loginImage from './assets/login_page_image.jpg';
 import signupImage from './assets/login_page_image.jpg'; // Assuming you have this
 import dashboardImage from './assets/student.jpg';

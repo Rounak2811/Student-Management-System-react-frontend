@@ -16,8 +16,8 @@ function OffCanvasNavbar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style={{ width: '250px' }}>
-                        <div className="offcanvas-header">
-                            <h5 className="offcanvas-title text-primary fw-bold fs-4" id="offcanvasNavbarLabel ">More Options</h5>
+                        <div className="offcanvas-header bg-primary">
+                            <h5 className="offcanvas-title text-white fw-bold fs-4" id="offcanvasNavbarLabel ">More Options</h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className="offcanvas-body">
@@ -33,6 +33,9 @@ function OffCanvasNavbar() {
                                 </li>
                                 <li className="nav-item " onMouseOver={(evt) => handleMouseOver(evt)} onMouseOut={(evt) => handleMouseOut(evt)}>
                                     <a className="nav-link text-danger fw-bold fs-5" href="#">Remove Student</a>
+                                </li>
+                                <li className="nav-item bg-danger " onMouseOver={(evt) => handleMouseOver(evt)} onMouseOut={(evt) => handleMouseOut(evt)}>
+                                    <a className="nav-link text-white fw-bold fs-5" href="#">Logout</a>
                                 </li>
                                 {/* <li className="nav-item dropdown">
                                     <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

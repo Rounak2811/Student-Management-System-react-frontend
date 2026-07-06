@@ -2,6 +2,7 @@ import { useState } from "react";
 import StudentList from "./StudentList";
 import AddStudent from "./AddStudent";
 import EditStudent from "./EditStudent";
+import OffCanvasNavbar from "./OffCanvasNavbar";
 
 function Dashboard() {
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -15,6 +16,7 @@ function Dashboard() {
       {/* This wrapper keeps the cards a nice, readable size */}
       <div className="w-100" style={{ maxWidth: "700px" }}>
         {/* 1. Add Student is on top */}
+        <OffCanvasNavbar />
         <AddStudent refresh={triggerRefresh} />
 
         {/* 2. Edit Student appears here if a student is clicked */}

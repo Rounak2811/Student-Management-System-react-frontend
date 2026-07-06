@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import { login } from "../services/AuthService";
 
 function Login({ onLoginSuccess }) {
@@ -18,7 +18,7 @@ function Login({ onLoginSuccess }) {
   };
 
   return (
-    <div className="card p-4 mx-auto mt-5" style={{ maxWidth: "400px" }}>
+    <div className={`card m-auto`} >
       <h3 className="text-center mb-4">Login</h3>
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleLogin}>
@@ -43,7 +43,6 @@ function Login({ onLoginSuccess }) {
         </button>
       </form>
 
-      {/* Add this section to link to the Signup page */}
       <div className="text-center">
         <span>Don't have an account? </span>
         <Link to="/signup">Sign up here</Link>

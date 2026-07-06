@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../services/AuthService";
 
+
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +30,7 @@ function Signup() {
   };
 
   return (
-    <div className="card p-4 mx-auto mt-5" style={{ maxWidth: "400px" }}>
+    <div className={`card p-4 mx-auto mt-5`}>
       <h3 className="text-center mb-4">Create an Account</h3>
 
       {error && <div className="alert alert-danger">{error}</div>}

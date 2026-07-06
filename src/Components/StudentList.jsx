@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getStudents, deleteStudent } from "../services/StudentService";
 
-function StudentList({ onEdit}) {
+function StudentList({ onEdit }) {
   const [students, setStudents] = useState([]);
   const [visible, setVisible] = useState(false);
 
@@ -20,7 +20,7 @@ function StudentList({ onEdit}) {
 
   return (
     <div className="card p-3 mt-4">
-      <div className="d-flex justify-content-between mb-3">
+      <div className="d-flex justify-content-between mb-3 text-primary">
         <h4>Students</h4>
 
         <button className="btn btn-primary" onClick={fetchStudents}>

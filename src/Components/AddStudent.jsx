@@ -4,7 +4,7 @@ import { createStudent } from "../services/StudentService";
 function AddStudent({ refresh }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -18,7 +18,7 @@ function AddStudent({ refresh }) {
   };
 
   return (
-    <div className="card p-3 mb-4">
+    <div className={`card p-3 mb-4 text-primary`}>
       <h4>Add Student</h4>
       <form onSubmit={handleSubmit}>
         <input

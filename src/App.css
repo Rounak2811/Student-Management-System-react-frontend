@@ -5,38 +5,43 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+/* Container holding everything */
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+/* The dedicated background layer */
+.blurred-background {
+  position: fixed;
+  /* Keeps background fixed when scrolling */
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  /* Scaled up to hide blurred edges */
+  height: 110%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  /* Adjust the blur intensity here */
+  z-index: 0;
+  /* Pushes the background behind everything else */
+}
+
+/* The foreground content layer */
+.content-layer {
+  position: relative;
+  z-index: 1;
+  /* Keeps text and forms on top, sharp and clear */
+  min-height: 100vh;
+  padding: 20px;
 }

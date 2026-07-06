@@ -53,12 +53,6 @@ function MainLayout() {
           <h2 className={`m-auto text-center text-${textColor}`}>
             Student Management System
           </h2>
-
-          {isAuthenticated && (
-            <button className="btn btn-danger" onClick={handleLogout}>
-              Logout
-            </button>
-          )}
         </div>
 
         <Routes>

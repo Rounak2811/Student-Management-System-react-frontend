@@ -1,4 +1,11 @@
+import { logout } from "../services/AuthService";
+
 function OffCanvasNavbar() {
+
+    const handleLogout = () => {
+        logout();
+        window.location.href = "/login";
+    };
 
     const handleMouseOver = (evt) => {
         evt.currentTarget.style.backgroundColor = 'skyblue';
@@ -34,7 +41,7 @@ function OffCanvasNavbar() {
                                 <li className="nav-item " onMouseOver={(evt) => handleMouseOver(evt)} onMouseOut={(evt) => handleMouseOut(evt)}>
                                     <a className="nav-link text-danger fw-bold fs-5" href="#">Remove Student</a>
                                 </li>
-                                <li className="nav-item bg-danger " onMouseOver={(evt) => handleMouseOver(evt)} onMouseOut={(evt) => handleMouseOut(evt)}>
+                                <li className="nav-item bg-danger " onMouseOver={(evt) => handleMouseOver(evt)} onMouseOut={(evt) => handleMouseOut(evt)} onClick={handleLogout}>
                                     <a className="nav-link text-white fw-bold fs-5" href="#">Logout</a>
                                 </li>
                                 {/* <li className="nav-item dropdown">

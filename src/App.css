@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -10,7 +10,7 @@
   padding: 2em;
 }
 
-/* Container holding everything */
+
 .app-wrapper {
   position: relative;
   min-height: 100vh;
@@ -19,29 +19,525 @@
   isolation: isolate;
 }
 
-/* The dedicated background layer */
 .blurred-background {
   position: fixed;
-  /* Keeps background fixed when scrolling */
+  
   top: -5%;
   left: -5%;
   width: 110%;
-  /* Scaled up to hide blurred edges */
+  
   height: 110%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(2px);
-  /* Adjust the blur intensity here */
+ 
   z-index: 0;
-  /* Pushes the background behind everything else */
+
 }
 
-/* The foreground content layer */
+
 .content-layer {
   position: relative;
   z-index: 1;
-  /* Keeps text and forms on top, sharp and clear */
   min-height: 100vh;
   padding: 20px;
+} */
+
+/* ==========================================================================
+   App.css — Student Management System design system
+   --------------------------------------------------------------------------
+   Direction: an "academic ledger" aesthetic — deep forest green + brass/gold
+   accents on a warm parchment background, a serif display face (Fraunces)
+   for headings paired with Inter for body text, and JetBrains Mono for
+   student ID numbers. Every card carries a thin gold top rule, echoing a
+   ledger or index-card heading. Built on top of your existing Bootstrap
+   classes (btn, card, form-control, navbar, offcanvas) — this file
+   restyles them via CSS variables and targeted overrides rather than
+   replacing Bootstrap, so no markup changes are required beyond what's in
+   the updated component files.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap');
+
+:root {
+  --ink: #17271f;
+  --forest: #1f4b3f;
+  --forest-dark: #163a30;
+  --forest-tint: #eaf1ed;
+  --gold: #c9a227;
+  --gold-soft: #e7ce7c;
+  --parchment: #faf6ee;
+  --paper: #ffffff;
+  --sage: #4c9a6a;
+  --sage-tint: #eaf6ee;
+  --brick: #b23a2e;
+  --brick-tint: #fbeae8;
+  --amber: #b8770a;
+  --amber-tint: #fdf1de;
+  --ink-muted: #6e7a70;
+  --border: #e6e0d1;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius: 14px;
+  --shadow-soft: 0 10px 30px -10px rgba(23, 39, 31, 0.18);
+  --shadow-lift: 0 16px 40px -12px rgba(23, 39, 31, 0.28);
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--parchment);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------------------------------
+   Page shell / background treatment
+   -------------------------------------------------------------------------- */
+.app-wrapper {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.blurred-background {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px) saturate(85%) brightness(0.55);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+.blurred-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(23, 39, 31, 0.82) 0%, rgba(31, 75, 63, 0.72) 55%, rgba(23, 39, 31, 0.88) 100%);
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  padding: 96px 16px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-header {
+  margin-bottom: 2rem !important;
+}
+
+.brand-header h2 {
+  font-weight: 600;
+  font-size: 1.7rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.brand-header h2::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* --------------------------------------------------------------------------
+   Ledger card — the shared "index card" look for auth + CRUD cards
+   -------------------------------------------------------------------------- */
+.ledger-card {
+  background: var(--paper);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  border-top: 4px solid var(--gold);
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  margin:auto;
+}
+
+.ledger-card .ledger-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  display: block;
+}
+
+.ledger-card h3,
+.ledger-card h4 {
+  font-weight: 600;
+}
+
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+/* Auth card (Login / Signup) */
+/* Reliable centering for the Login/Signup card. m-auto alone depended on
+   how the parent flex container resolved cross-axis space, which is why it
+   drifted left in some layouts — this wrapper owns its own centering. */
+.auth-page-wrapper {
+  width: 100%;
+  min-height: 60vh;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 2.25rem 2rem;
+}
+
+.auth-card .auth-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--gold-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Forms
+   -------------------------------------------------------------------------- */
+.form-control {
+  border: 1px solid var(--border);
+  background: var(--parchment);
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 0.6rem 0.85rem;
+}
+
+.form-control:focus {
+  border-color: var(--forest);
+  box-shadow: 0 0 0 3px rgba(31, 75, 63, 0.15);
+  background: var(--paper);
+}
+
+.form-control::placeholder {
+  color: #9aa39a;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons — override Bootstrap's default palette to match the ledger theme
+   -------------------------------------------------------------------------- */
+.btn {
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 0.55rem 1.1rem;
+  letter-spacing: 0.01em;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.85;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary:disabled {
+  background-color: var(--forest-dark);
+  border-color: var(--forest-dark);
+  box-shadow: 0 6px 18px -6px rgba(31, 75, 63, 0.45);
+}
+
+.btn .spinner-border-sm {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-width: 0.15em;
+}
+
+.btn-primary {
+  background-color: var(--forest);
+  border-color: var(--forest);
+  color: #fff;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--forest-dark);
+  border-color: var(--forest-dark);
+  box-shadow: 0 6px 18px -6px rgba(31, 75, 63, 0.5);
+}
+
+.btn-success {
+  background-color: var(--sage);
+  border-color: var(--sage);
+  color: #fff;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #3f8759;
+  border-color: #3f8759;
+  box-shadow: 0 6px 18px -6px rgba(76, 154, 106, 0.5);
+}
+
+.btn-danger {
+  background-color: var(--brick);
+  border-color: var(--brick);
+  color: #fff;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #933025;
+  border-color: #933025;
+}
+
+.btn-warning {
+  background-color: var(--amber);
+  border-color: var(--amber);
+  color: #fff;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: #9a6208;
+  border-color: #9a6208;
+  color: #fff;
+}
+
+.btn-outline-success {
+  color: var(--sage);
+  border-color: var(--sage);
+}
+
+.btn-outline-success:hover {
+  background-color: var(--sage);
+  border-color: var(--sage);
+}
+
+/* --------------------------------------------------------------------------
+   Alerts
+   -------------------------------------------------------------------------- */
+.alert-danger {
+  background-color: var(--brick-tint);
+  border: 1px solid rgba(178, 58, 46, 0.25);
+  color: #7d2a21;
+  border-radius: 10px;
+}
+
+.alert-success {
+  background-color: var(--sage-tint);
+  border: 1px solid rgba(76, 154, 106, 0.3);
+  color: #2c6642;
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   Spinner row
+   -------------------------------------------------------------------------- */
+.spinner-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--forest);
+  font-weight: 600;
+  font-size: 0.92rem;
+  margin-bottom: 0.75rem;
+}
+
+.spinner-border.text-primary {
+  color: var(--forest) !important;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-width: 0.18em;
+}
+
+/* --------------------------------------------------------------------------
+   Navbar / OffCanvas
+   -------------------------------------------------------------------------- */
+.sms-navbar {
+  background: var(--forest) !important;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.15);
+}
+
+.sms-navbar .navbar-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--gold-soft) !important;
+}
+
+.sms-navbar .navbar-brand-mark .mark-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.sms-navbar .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+.sms-navbar .navbar-toggler-icon {
+  filter: invert(1) brightness(2);
+}
+
+.offcanvas-header.sms-offcanvas-header {
+  background: var(--forest) !important;
+  border-bottom: 3px solid var(--gold);
+}
+
+.sms-nav-item {
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.sms-nav-item .nav-link {
+  padding: 0.7rem 0.9rem;
+  border-radius: 10px;
+}
+
+.sms-nav-item:hover {
+  background-color: var(--forest-tint) !important;
+}
+
+.sms-nav-item.sms-nav-logout {
+  background-color: var(--brick-tint);
+  margin-top: 0.75rem;
+}
+
+.sms-nav-item.sms-nav-logout .nav-link {
+  color: var(--brick) !important;
+}
+
+.sms-nav-item.sms-nav-logout:hover {
+  background-color: var(--brick) !important;
+}
+
+.sms-nav-item.sms-nav-logout:hover .nav-link {
+  color: #fff !important;
+}
+
+/* --------------------------------------------------------------------------
+   Student table — replaces the flat Bootstrap-default table look
+   -------------------------------------------------------------------------- */
+.student-table-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.student-table {
+  margin-bottom: 0;
+}
+
+.student-table thead {
+  background: var(--forest) !important;
+}
+
+.student-table thead th {
+  color: var(--gold-soft);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: none;
+  padding: 0.85rem 1rem;
+}
+
+.student-table tbody tr {
+  background-color: var(--paper);
+}
+
+.student-table tbody tr:nth-of-type(odd) {
+  background-color: var(--sage-tint);
+}
+
+.student-table tbody td {
+  vertical-align: middle;
+  padding: 0.75rem 1rem;
+  border-color: var(--border);
+}
+
+.student-id-cell {
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.student-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.avatar-badge {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.student-email-cell {
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--ink-muted);
+}
+
+.empty-state .empty-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
 }
